@@ -1,36 +1,32 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    <script src="react.js"></script>
-    <script src="react-dom.js"></script>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>React Counter</title>
+<script src="https://unpkg.com/react/umd/react.development.js"></script>
+<script src="https://unpkg.com/react-dom/umd/react-dom.development.js"></script>
 </head>
 <body>
-    <div id="My_React_Code"></div>
-
+<div id="My_React_Code"></div>
 
 <script>
-   var Counter = React.createClass({
-        render: function() {
-            var time_Passed = Math.round(this.props.time_Passed / 100);
-            var seconds_Passed = time_Passed / 10 + (time_Passed % 10 ? '' : '.0');
-            var text = 'My react code started running ' + seconds_Passed + ' seconds ago!';
-            return React.Dom.p(null, text);
-        }
-    });
+class Counter extends React.Component {
+  render() {
+    const timePassed = Math.round(this.props.timePassed / 100);
+    const secondsPassed = timePassed / 10 + (timePassed % 10 ? '' : '.0');
+    const text = 'My react code started running ' + secondsPassed + ' seconds ago!';
+    return React.createElement('p', null, text);
+  }
+}
 
-    var start_Counting = new Date().getTime();
-    setInterval(function() {
-        ReactDOM.render(
-            counter_Factory=({time_Passed:new Date().getTime() - start_Counting}),
-            document.getElementById('My_React_Code')
-        );
-    }, 
-    50);
-
-
+const startCounting = new Date().getTime();
+setInterval(function() {
+  ReactDOM.render(
+    React.createElement(Counter, { timePassed: new Date().getTime() - startCounting }),
+    document.getElementById('My_React_Code')
+  );
+}, 50);
 </script>
 </body>
 </html>
